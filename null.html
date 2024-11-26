@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>فك تشفير النص</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <h1>فك تشفير النص المشفر</h1>
+    <p>أدخل كلمة المرور لفك النص:</p>
+    <input type="password" id="decrypt-password" placeholder="أدخل كلمة المرور">
+    <button onclick="decryptText()">فك النص</button>
+
+    <h2>النص المفكوك:</h2>
+    <p id="decrypted-text"></p>
+
+    <script>
+        // النص المشفر
+        const encryptedText = "U2FsdGVkX1+hjIBzivchnygLiqUQklo1MToM2+IEzuJP1d3yRwDb4cTg6CEjwfNetWYqYMcKavhQvokZ5dIyLaUl+nBi/+tjKcE4BwR7RKemuVtU6iDbsSGkmb/fPhLqCGWMATE56GEkyvvucd5VXrX5tPjUC0HImUJb/77Sbxo=";
+
+        function decryptText() {
+            const password = document.getElementById("decrypt-password").value;
+            try {
+                const bytes = CryptoJS.AES.decrypt(encryptedText, password);
+                const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+                if (decrypted) {
+                    document.getElementById("decrypted-text").innerText = decrypted;
+                } else {
+                    alert("كلمة المرور غير صحيحة!");
+                }
+            } catch (error) {
+                alert("حدث خطأ أثناء فك التشفير. تأكد من كلمة المرور!");
+            }
+        }
+    </script>
+</body>
+</html>
